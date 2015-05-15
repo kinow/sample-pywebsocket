@@ -1,5 +1,5 @@
-# Simple example with WebSockets in Python
+# Simple example with Web Socket in Python
 
-Web Sockets example in Python
+Web Socket example in Python
 
 License: MIT License
