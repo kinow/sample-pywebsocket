@@ -5,7 +5,7 @@
          var socket = null;
          var isopen = false;
          window.onload = function() {
-            socket = new WebSocket("ws://127.0.0.1:9000");
+            socket = new WebSocket("ws://0.0.0.0:9000");
             socket.binaryType = "arraybuffer";
             socket.onopen = function() {
                console.log("Connected!");
@@ -13,6 +13,8 @@
             }
             socket.onmessage = function(e) {
                if (typeof e.data == "string") {
+                  // Setting the value
+                  document.getElementById('value').innerHTML = e.data;
                   console.log("Text message received: " + e.data);
                } else {
                   var arr = new Uint8Array(e.data);
@@ -29,6 +31,7 @@
                isopen = false;
             }
          };
+         // alter this to change the code sent to the server
          function sendText() {
             if (isopen) {
                socket.send("Hello, world!");
@@ -51,6 +54,7 @@
       </script>
    </head>
    <body>
+      <h1>Server time (every 5s): <span id='value' style='color: #333333'>0</span></h1>
       <p>Open your browser's JavaScript console to see what's happening (hit F12).</p>
       <button onclick='sendText();'>Send Text Message</button>
       <button onclick='sendBinary();'>Send Binary Message</button>
